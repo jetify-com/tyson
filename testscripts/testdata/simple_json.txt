@@ -1,0 +1,13 @@
+# Evaluate a simple json object
+exec tyson eval input.tson
+cmp stdout expected.json
+
+-- input.tson --
+export default {
+  key: "value"
+}
+
+-- expected.json --
+{
+  "key": "value"
+}
