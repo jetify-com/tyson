@@ -29,11 +29,10 @@ const tsConfig = `
     "inlineSourceMap": true,
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["deno.window"],
     "module": "esnext",
     "moduleDetection": "force",
     "strict": true,
-    "target": "es5",
+    "target": "es6",
     "useDefineForClassFields": true
   }
 }
@@ -52,7 +51,7 @@ func Build(entrypoint string) ([]byte, error) {
 			".tson": api.LoaderTS,
 		},
 		Platform:    api.PlatformBrowser,
-		Target:      api.ES5,
+		Target:      api.ES2015, // ES6 == ES2015
 		TsconfigRaw: tsConfig,
 		Write:       false,
 	})
