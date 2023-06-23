@@ -1,8 +1,8 @@
-# TySON
-### Typescript Object Notation: use TypeScript as a configuration language
+# TySON 🥊
+### Use TypeScript as a configuration language
 
 # What is it?
-TySON is a subset of TypeScript, chosen to be useful as an embeddable configuration
+TySON (TypeScript Object Notation) is a subset of TypeScript, chosen to be useful as an embeddable configuration
 language that generates JSON. You can think of it as JSON + types + functions using
 TypeScript syntax. TySON files use the `.tson` extension.
 
@@ -69,4 +69,6 @@ At the moment we offer:
 2. A command line tool, compiled as a single binary, that can parse and
    evaluate TySON files to JSON.
 
-Once we've solidified the spec, we plan to build libraries for other languages.
+Based on feedback from the community, we plan to add:
+1. A formal spec for TySON (once we feel confident that the feature set is stable).
+2. Implementations for other languages including `rust`.

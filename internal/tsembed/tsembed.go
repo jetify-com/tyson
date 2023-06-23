@@ -5,6 +5,7 @@ import (
 
 	"github.com/dop251/goja"
 	"github.com/evanw/esbuild/pkg/api"
+	"go.jetpack.io/tyson/msgerror"
 )
 
 func Eval(entrypoint string) (goja.Value, error) {
@@ -57,7 +58,8 @@ func Build(entrypoint string) ([]byte, error) {
 	})
 
 	if len(bundle.Errors) > 0 {
-		return nil, fmt.Errorf("failed to build: %v", bundle.Errors)
+		msg := fmt.Sprintf("%d syntax errors when compiling %s", len(bundle.Errors), entrypoint)
+		return nil, msgerror.ErrFromMessages(msg, bundle.Errors)
 	}
 
 	if len(bundle.OutputFiles) != 1 {

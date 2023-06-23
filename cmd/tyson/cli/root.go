@@ -2,10 +2,12 @@ package cli
 
 import (
 	"context"
-	"log"
+	"errors"
+	"fmt"
 	"os"
 
 	"github.com/spf13/cobra"
+	"go.jetpack.io/tyson/msgerror"
 )
 
 func RootCmd() *cobra.Command {
@@ -28,7 +30,14 @@ func Execute(ctx context.Context, args []string) int {
 	cmd.SetArgs(args)
 	err := cmd.ExecuteContext(ctx)
 	if err != nil {
-		log.Println(err)
+		var msgError *msgerror.Error
+		if errors.As(err, &msgError) {
+			for _, msg := range msgError.Messages() {
+				fmt.Fprintln(os.Stderr, msg)
+			}
+		} else {
+			fmt.Fprintf(os.Stderr, "[ERROR] %s\n", err)
+		}
 		return 1
 	}
 	return 0
