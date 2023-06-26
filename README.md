@@ -1,26 +1,68 @@
 # TySON 🥊
-### Use TypeScript as a configuration language
+### TypeScript as a Config Language
 
 # What is it?
 TySON (TypeScript Object Notation) is a subset of TypeScript, chosen to be useful as an embeddable configuration
-language that generates JSON. You can think of it as JSON + types + functions using
+language that generates JSON.
+You can think of TySON as **JSON + comments + types + basic logic** using
 TypeScript syntax. TySON files use the `.tson` extension.
 
-The goal is to make it possible for all major programming languages to read
-configuration written in TypeScript using native libraries.
+Here's a simple example.tson:
 
-The benefits of using TySON include:
-- **Type safety**: use TypeScript's type system to ensure that your configuration
-  is valid.
-- **Programmable**: you can define functions and modules that generate configuration
-  programmatically.
-- **Nicer Syntax**: unlike JSON, TypeScript supports comments, trailing commas,
-  and multi-line strings, in addition to types and functions. Unlike languages
-  `dhall`, `cue`, `jsonnet`, or `nickel`, you don't have to learn a new language
-  if you're already familiar with TypeScript.
-- **Editor Support**: because TySON is a subset of TypeScript, your editor already
-  supports syntax highlighting, formatting and auto-completion for it. Simply
-  configure your editor to treat `.tson` files as TypeScript files.
+```
+// example.tson
+export default {
+  // Comments
+  string_field: 'string',
+  number_field: 123,
+  boolean_field: true,
+  array_field: [1, 2, 3], // Add more comments.
+  object_field: {
+    nested_field: "nested",
+  }
+}
+```
+
+## Benefits of using TySON
+**Type safety**: Use TypeScript's type system to ensure that your configuration is valid. 
+
+**Programmable**: You can generate configuration programmatically. 
+For example, you can import and override values like this:
+  
+```
+import otherConfig from './your_other_config.tson'
+
+export default {
+  ...otherConfig,
+  valuesToOverride: 'values1',
+}
+```
+
+**Nicer Syntax**: Unlike JSON, TypeScript supports comments, trailing commas, 
+and multi-line strings, in addition to types and functions. Unlike languages 
+`dhall`, `cue`, `jsonnet`, or `nickel`, you don't have to learn a new language 
+if you're already familiar with TypeScript:
+
+```
+const str_1 = 'test';
+const countFn = () => 2 + 2;
+
+export default {
+  /*
+   * Add multi-line comments
+   */
+  multi_line_str: `line 1
+  line 2
+  line 3`,
+  interpolated_str: `${str_1} example`,
+  count: countFn(),
+}
+```
+
+**Editor Support**: Because TySON is a subset of TypeScript, your editor already 
+supports syntax highlighting, formatting and auto-completion for it. 
+Simply configure your editor to treat `.tson` files as TypeScript files.
+
 
 # Why?
 Almost all developer tools require some form of configuration. In our opinion,
