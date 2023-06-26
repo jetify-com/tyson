@@ -1,7 +1,7 @@
 # TySON 🥊
 ### TypeScript as a Configuration Language
 
-# What is it?
+## What is it?
 TySON (TypeScript Object Notation) is a subset of TypeScript, chosen to be useful as an embeddable configuration
 language that generates JSON.
 You can think of TySON as **JSON + comments + types + basic logic** using
@@ -48,6 +48,9 @@ The above evaluates to the following JSON:
 }
 ```
 
+TySON was originally developed by [jetpack.io](https://www.jetpack.io). We are exploring 
+using it as a configuration language for [Devbox](https://github.com/jetpack-io/devbox).
+
 ## Benefits of using TySON
 **Type safety**: Use TypeScript's type system to ensure that your configuration is valid. 
 
@@ -86,7 +89,7 @@ supports syntax highlighting, formatting and auto-completion for it.
 Simply configure your editor to treat `.tson` files as TypeScript files.
 
 
-# Why?
+## Why?
 Almost all developer tools require some form of configuration. In our opinion,
 an ideal configuration language should be:
 + **Easy to read and write by humans**
@@ -123,16 +126,18 @@ for configuration. But when writting tools in other languages like `go`, what he
 us back was the lack of native libraries for evaluating TypeScript-based
 configs. We decided to build TySON to address this issue.
 
-# Status
+## Next Steps
 We're sharing TySON as an early developer preview, to get feedback from the
 community before we solidify the spec.
 
 At the moment we offer:
-1. A golang library that can parse TySON files and evaluate them to JSON.
-   It is built on top of the widely adopted, and rock-solid `esbuild`.
-2. A command line tool, compiled as a single binary, that can parse and
+1. A `golang` library that can parse TySON files and evaluate them to JSON.
+   It is built on top of the widely adopted, and rock-solid `esbuild` with `es6`
+   syntax support.
+1. A command line tool, compiled as a single binary, that can parse and
    evaluate TySON files to JSON.
 
 Based on feedback from the community, we plan to add:
 1. A formal spec for TySON (once we feel confident that the feature set is stable).
-2. Implementations for other languages including `rust`.
+1. Implementations for other languages including `rust`.
+
