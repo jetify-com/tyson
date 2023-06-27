@@ -126,6 +126,22 @@ for configuration. But when writting tools in other languages like `go`, what he
 us back was the lack of native libraries for evaluating TypeScript-based
 configs. We decided to build TySON to address this issue.
 
+## Command Line Tool
+TySON comes with a command line tool that can be used to convert TySON files to
+JSON. To install it, run:
+
+```bash
+curl -fsSL https://get.jetpack.io/tyson | bash
+```
+
+To convert the file `input.tson` into JSON, run:
+
+```bash
+tyson eval input.tson
+```
+
+The resulting JSON will be printed to stdout.
+
 ## Next Steps
 We're sharing TySON as an early developer preview, to get feedback from the
 community before we solidify the spec.
