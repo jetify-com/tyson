@@ -1,0 +1,19 @@
+{
+  "env": {
+    "PATH": "$PATH:$PWD/dist"
+  },
+  "packages": [
+    "go@1.19",
+    "golangci-lint@latest"
+  ],
+  "shell": {
+    "init_hook": [
+      "export \"GOROOT=$(go env GOROOT)\""
+    ],
+    "scripts": {
+      "build_cli": "go build -o dist/tyson cmd/tyson/main.go",
+      "test": "go test -race -cover ./...",
+      "lint": "golangci-lint run"
+    }
+  }
+}
