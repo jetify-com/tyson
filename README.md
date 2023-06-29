@@ -1,18 +1,18 @@
 # TySON 🥊
 
-### Use TypeScript as a Configuration Language
+### TypeScript as a Configuration Language
 
 [![Open In Devbox.sh](https://jetpack.io/img/devbox/open-in-devbox.svg)](https://devbox.sh/github.com/jetpack-io/tyson)
 
 ## What is it?
-
-TySON (TypeScript Object Notation) is a subset of TypeScript, chosen to be useful as an embeddable configuration
-language that generates JSON.
+TySON (TypeScript Object Notation) is a subset of TypeScript, chosen to be useful as an
+embeddable configuration language that generates JSON.
 You can think of TySON as **JSON + comments + types + basic logic** using
 TypeScript syntax. TySON files use the `.tson` extension.
 
 The goal is to make it possible for all major programming languages to read
-configuration written in TypeScript using native libraries.
+configuration written in TypeScript using _native libraries_. In fact, our first
+implementation is written in pure `go`.
 
 Here's a simple example.tson:
 
@@ -121,17 +121,29 @@ or TOML, but they each have drawbacks:
   https://noyaml.com/ for more examples.
 - **TOML**: Gets unwidely when there's multiple levels of nesting.
 
-As a response to these issues, and the lack of programmability a number of new configuration languages have emerged, including `dhall`, `cue`, `jsonnet`, and
+As a response to these issues, and the lack of programmability, a number of new configuration languages have emerged including `dhall`, `cue`, `jsonnet`, and
 `nickel`. These languages address several of the issues above, **but** they all
 require users to learn new syntax.
 
-When trying to adopt them, we found ourselves fustrated, wishing we could just
+In a playful way, we like to call this the Tarpit Law,
+named so after the [Turing Tarpit](https://en.wikipedia.org/wiki/Turing_tarpit) and
+[Greenspun's Tenth Rule](https://en.wikipedia.org/wiki/Greenspun%27s_tenth_rule):
+> **The Tarpit Law of Programming**:
+> "Every configuration language that supports logic, eventually evolves into an ad-hoc,
+> informally-specified, bug-ridden, and slow implementation of a Turing complete language."
+
+This is meant to be tongue-in-cheek: many of the above languges are well-specified, and not buggy ... but still, while trying to adopt them,
+we found ourselves fustrated, wishing that instead of learning a new syntax, we could just
 use an existing, widely adopted language like TypeScript instead.
 
-Within the JavaScript ecosystem, most tools already allow users to use TypeScript
-for configuration. But when writting tools in other languages like `go`, what held
-us back was the lack of native libraries for evaluating TypeScript-based
-configs. We decided to build TySON to address this issue.
+So we asked ourselves, why _don't_ we already use TypeScript as a configuration language?
+What's stopping us? In fact, within the JavaScript ecosystem, most tools _already_ allow
+users to use TypeScript for configuration. Why don't we do the same in other ecosystems?
+
+We realized that the blocker for us was the lack of native libraries for evaluating TypeScript-based
+configs and converting them to JSON. We decided to build TySON to address this issue.
+Our first implementation is a library in pure `go`, that can evaluate TySON files and convert
+them to JSON. Implementations for other languages will follow suit.
 
 ## Command Line Tool
 TySON comes with a command line tool that can be used to convert TySON files to
@@ -166,3 +178,23 @@ Based on feedback from the community, we plan to add:
 
 1. A formal spec for TySON (once we feel confident that the feature set is stable).
 1. Implementations for other languages including `rust`.
+
+# Related Work
+Alternative configuration languages that can be converted to JSON, include:
++ [dhall](https://dhall-lang.org/)
++ [cue](https://cuelang.org/)
++ [jsonnet](https://jsonnet.org/)
++ [nickel](https://nickel-lang.org/)
+
+If you are willing to learn a new syntax for your configuration then these alternatives
+can provide different guarantees. As an examples:
++ Dhall works hard to be a [total language](https://dhall-lang.org/)
+instead of being Turing complete
++ Cue has a type-system based on graph unification
+that makes it easy to combine values in any order and still get the same result,
+which is sometimes easier to reason with.
+
+TySON's main differentiator is that we use TypeScript as the underlying language.
+It makes it possible to immediately get started with a familiar syntax, and reuse
+existing editor (and ecosystem) support for TypeScript.
+
