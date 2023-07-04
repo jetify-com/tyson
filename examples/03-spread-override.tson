@@ -1,0 +1,19 @@
+// This example shows how to use the spread operator to override fields
+
+var simple = {
+  name: 'Alyssa',
+  title: 'Hacker',
+  age: 21,
+}
+
+export default {
+  ...simple,  // Spread operator is supported
+  age: 31, // Override the age field
+}
+
+// This file evaluates to the following JSON:
+// {
+//   "age": 31,
+//   "name": "Alyssa",
+//   "title": "Hacker"
+// }

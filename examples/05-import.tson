@@ -1,0 +1,12 @@
+// This example shows how to import configuration from other files.
+import simple from './01-simple.tson';
+
+export default {
+  // Access the `number_field` field from imported TSON
+  result: simple.number_field
+}
+
+// This file evaluates to the following JSON:
+// {
+//   "result": 123
+// }

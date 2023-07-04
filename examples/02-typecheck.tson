@@ -1,0 +1,13 @@
+// This example shows how to use type annotations to validate TSON objects
+
+type Config = {
+  // This field is required
+  required_field: string
+  // This field is optional
+  optional_field?: number
+};
+
+export default {
+  optional_field: "1",  // Type error: expected number, got string
+  rquired_field: 'bar', // This typo will be caught by the TypeScript compiler
+} satisfies Config;

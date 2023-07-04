@@ -1,0 +1,38 @@
+// This example shows the basic syntax of TSON, including the different field types,
+// support for comments, trailing commas, and multi-line strings (template literals).
+//
+// This is the same example as in the README.
+
+export default {
+  // Single-line comments are supported
+  array_field: [1, 2, 3],
+  boolean_field: true,
+  /* As well as multi-line comments, and multi-line strings.
+   * Multi-line strings are TypeScript template literals, so they also support
+   * interpolation.
+   */
+  multi_line_string_field: `
+    line 1
+    line 2
+    line ${2 + 1}
+  `,
+  number_field: 123,
+  string_field: 'string',
+  object_field: {
+    // Notice that, unlike JSON, field names can be unquoted if they're a valid
+    // TypeScript identifier.
+    nested_field: "nested",
+  }, // Trailing commas are allowed
+}
+
+// This file evaluates to the following JSON:
+// {
+//   "array_field": [ 1, 2, 3 ],
+//   "boolean_field": true,
+//   "multi_line_string_field": "\n    line 1\n    line 2\n    line 3\n  ",
+//   "number_field": 123,
+//   "object_field": {
+//     "nested_field": "nested"
+//   },
+//   "string_field": "string"
+// }

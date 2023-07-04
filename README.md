@@ -1,4 +1,4 @@
-# TySON 🥊
+# TySON (TypeScript Object Notation) 🥊 
 
 ### TypeScript as a Configuration Language
 
@@ -10,26 +10,37 @@ embeddable configuration language that generates JSON.
 You can think of TySON as **JSON + comments + types + basic logic** using
 TypeScript syntax. TySON files use the `.tson` extension.
 
-The goal is to make it possible for all major programming languages to read
-configuration written in TypeScript using _native libraries_. In fact, our first
-implementation is written in pure `go`.
+The goal is to make it possible for _all major programming languages_ to read
+configuration written in TypeScript using _native libraries_. That is, a `go` program
+should be able to read TySON using a `go` library, a `rust` program should be able to
+read TySON using a `rust` library, and so on. Our first implementation is written in pure
+`go`, and a `rust` implementation will follow.
 
-Here's a simple example.tson:
+Here's an example `.tson` file:
 
 ```typescript
 // example.tson
 export default {
-  // Comments
-  string_field: 'string',
-  multi_line_string_field: `line 1
-    line 2
-    line 3`,
-  number_field: 123,
+  // Single-line comments are supported
+  array_field: [1, 2, 3],
   boolean_field: true,
-  array_field: [1, 2, 3], // Add more comments.
+  /* As well as multi-line comments, and multi-line strings.
+   *
+   * Multi-line strings are TypeScript template literals, so they also support
+   * interpolation.
+   */
+  multi_line_string_field: `
+    line 1
+    line 2
+    line ${1 + 2}
+  `,
+  number_field: 123,
+  string_field: 'string',
   object_field: {
+    // Notice that, unlike JSON, field names can be unquoted if they're a valid
+    // TypeScript identifier.
     nested_field: "nested",
-  }
+  }, // Trailing commas are allowed
 }
 ```
 
@@ -37,13 +48,9 @@ The above evaluates to the following JSON:
 
 ```json
 {
-  "array_field": [
-    1,
-    2,
-    3
-  ],
+  "array_field": [ 1, 2, 3 ],
   "boolean_field": true,
-  "multi_line_string_field": "line 1\n    line 2\n    line 3",
+  "multi_line_string_field": "\n    line 1\n    line 2\n    line 3\n  ",
   "number_field": 123,
   "object_field": {
     "nested_field": "nested"
@@ -57,6 +64,19 @@ using it as a configuration language for [Devbox](https://github.com/jetpack-io/
 
 ## Benefits of using TySON
 **Type safety**: Use TypeScript's type system to ensure that your configuration is valid.
+```typescript
+type Config = {
+  // This field is required
+  required_field: string
+  // This field is optional
+  optional_field?: number
+};
+
+export default {
+  optional_field: "1",  // Type error: expected number, got string
+  rquired_field: 'bar', // This typo will be caught by the TypeScript compiler
+} : Config
+```
 
 **Programmable**: You can generate configuration programmatically.
 For example, you can import and override values like this:
@@ -64,34 +84,37 @@ For example, you can import and override values like this:
 ```typescript
 import otherConfig from './your_other_config.tson'
 
+// Import otherConfig and override some values:
 export default {
-  ...otherConfig,
+  ...otherConfig,  // Spread operator is supported
   valuesToOverride: 'values1',
+}
+```
+
+Or you can define functions and use them in your configuration:
+```typescript
+// We can write a function to help us generate configuration:
+function person(first_name: string, last_name: string) {
+  return {
+    first_name,
+    last_name,
+    full_name: `${first_name} ${last_name}`,
+  };
+}
+
+export default {
+  people: [person('Alyssa', 'Hacker'), person('Ben', 'Bitdiddle')],
 }
 ```
 
 **Nicer Syntax**: Unlike JSON, TypeScript supports comments, trailing commas,
 and multi-line strings, in addition to types and functions. Unlike languages
 `dhall`, `cue`, `jsonnet`, or `nickel`, you don't have to learn a new language
-if you're already familiar with TypeScript:
-
-```typescript
-const str_1 = 'test';
-const countFn = () => 2 + 2;
-
-export default {
-  /*
-   * Add multi-line comments
-   */
-  interpolated_str: `${str_1} example`,
-  count: countFn(),
-}
-```
+if you're already familiar with TypeScript.
 
 **Editor Support**: Because TySON is a subset of TypeScript, your editor already
 supports syntax highlighting, formatting and auto-completion for it.
 Simply configure your editor to treat `.tson` files as TypeScript files.
-
 
 ## Why?
 
@@ -169,14 +192,13 @@ community before we solidify the spec.
 At the moment we offer:
 
 1. A `golang` library that can parse TySON files and evaluate them to JSON.
-   It is built on top of the widely adopted, and rock-solid `esbuild` with `es6`
-   syntax support.
+   It is built on top of the widely adopted, and rock-solid `esbuild`.
 1. A command line tool, compiled as a single binary, that can parse and
    evaluate TySON files to JSON.
 
 Based on feedback from the community, we plan to add:
 
-1. A formal spec for TySON (once we feel confident that the feature set is stable).
+1. A formal spec for TySON (once we feel confident we can retain backwards compatibility).
 1. Implementations for other languages including `rust`.
 
 # Related Work
@@ -197,4 +219,3 @@ which is sometimes easier to reason with.
 TySON's main differentiator is that we use TypeScript as the underlying language.
 It makes it possible to immediately get started with a familiar syntax, and reuse
 existing editor (and ecosystem) support for TypeScript.
-

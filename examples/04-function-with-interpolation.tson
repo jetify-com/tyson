@@ -1,0 +1,31 @@
+// This example shows how to use functions and string interpolation in TSON.
+
+// person() function helps us define the JSON for a person.
+function person(first_name: string, last_name: string) {
+  return {
+    first_name,
+    last_name,
+    full_name: `${first_name} ${last_name}`,  // String interpolation
+  };
+}
+
+export default {
+  // Use the person() function to define the JSON for two people.
+  people: [person('Alyssa', 'Hacker'), person('Ben', 'Bitdiddle')],
+}
+
+// This file evaluates to the following JSON:
+// {
+//   "people": [
+//     {
+//       "first_name": "Alyssa",
+//       "full_name": "Alyssa Hacker",
+//       "last_name": "Hacker"
+//     },
+//     {
+//       "first_name": "Ben",
+//       "full_name": "Ben Bitdiddle",
+//       "last_name": "Bitdiddle"
+//     }
+//   ]
+// }
