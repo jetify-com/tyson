@@ -3,7 +3,7 @@
 //
 // This is the same example as in the README.
 
-export default {
+{
   // Single-line comments are supported
   array_field: [1, 2, 3],
   boolean_field: true,

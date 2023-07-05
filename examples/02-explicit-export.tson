@@ -1,0 +1,22 @@
+// When there are several expressions in a file, how does TySON choose which one
+// to evaluate as JSON?
+// Simple: it always uses the default export
+
+var one = {
+  one: 1
+}
+
+var two = {
+  two: 2
+}
+
+var three = {
+  three: 3
+}
+
+export default two; // This is the default export
+
+// This file evaluates to the following JSON:
+// {
+//   "two": 2
+// }

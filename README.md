@@ -20,7 +20,7 @@ Here's an example `.tson` file:
 
 ```typescript
 // example.tson
-export default {
+{
   // Single-line comments are supported
   array_field: [1, 2, 3],
   boolean_field: true,
@@ -70,12 +70,14 @@ type Config = {
   required_field: string
   // This field is optional
   optional_field?: number
-};
+}
 
+// When there are multiple expressions in a file, we need to `export default` the one
+// that should be evaluated as JSON:
 export default {
   optional_field: "1",  // Type error: expected number, got string
   rquired_field: 'bar', // This typo will be caught by the TypeScript compiler
-} : Config
+} satisfies Config
 ```
 
 **Programmable**: You can generate configuration programmatically.

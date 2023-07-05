@@ -1,0 +1,20 @@
+// If TySON always uses the default export, how does it handle simple JSON-like cases
+// where there are no exports?
+//
+// The answer is that while TySON uses standard TypeScript syntax, it does apply
+// a single non-standard transformation to the input file: if a file has a single
+// top-level object literal, then that object literal is implicitly treated as the
+// default export.
+//
+// This transformation is important, because it makes it possible to read standard
+// .json files as valid .tson files.
+
+// In this example, the following object literal is interpreted as the default export:
+{
+  foo: 'bar',
+}
+
+// In other words, it's the same as if we had written:
+// export default {
+//  foo: 'bar',
+// }

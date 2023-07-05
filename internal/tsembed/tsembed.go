@@ -44,12 +44,10 @@ func Build(entrypoint string) ([]byte, error) {
 	bundle := api.Build(api.BuildOptions{
 		EntryPoints: []string{entrypoint},
 
-		Bundle:     true,
-		Charset:    api.CharsetUTF8,
-		GlobalName: globalsName,
-		Loader: map[string]api.Loader{
-			".tson": api.LoaderTS,
-		},
+		Bundle:      true,
+		Charset:     api.CharsetUTF8,
+		GlobalName:  globalsName,
+		Plugins:     []api.Plugin{TsonTransform},
 		Platform:    api.PlatformBrowser,
 		Target:      api.ES2015, // ES6 == ES2015
 		TsconfigRaw: tsConfig,

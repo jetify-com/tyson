@@ -6,6 +6,8 @@ var simple = {
   age: 21,
 }
 
+// Since we have multiple expressions in this file, we must be explicit with
+// "export default"
 export default {
   ...simple,  // Spread operator is supported
   age: 31, // Override the age field
