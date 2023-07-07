@@ -141,10 +141,10 @@ Traditionally, the most popular choices for configuration have been: JSON, YAML
 or TOML, but they each have drawbacks:
 
 - **JSON**: doesn't support comments, trailing commas, or multi-line strings.
-- **YAML**: has an ambigous syntax. For example the token `no` is interpreted
+- **YAML**: has an ambiguous syntax. For example the token `no` is interpreted
   as a boolean, often in cases where you want it to be a string. See
   https://noyaml.com/ for more examples.
-- **TOML**: Gets unwidely when there's multiple levels of nesting.
+- **TOML**: Gets unwieldy when there's multiple levels of nesting.
 
 As a response to these issues, and the lack of programmability, a number of new configuration languages have emerged including `dhall`, `cue`, `jsonnet`, and
 `nickel`. These languages address several of the issues above, **but** they all
@@ -157,8 +157,8 @@ named so after the [Turing Tarpit](https://en.wikipedia.org/wiki/Turing_tarpit) 
 > "Every configuration language that supports logic, eventually evolves into an ad-hoc,
 > informally-specified, bug-ridden, and slow implementation of a Turing complete language."
 
-This is meant to be tongue-in-cheek: many of the above languges are well-specified, and not buggy ... but still, while trying to adopt them,
-we found ourselves fustrated, wishing that instead of learning a new syntax, we could just
+This is meant to be tongue-in-cheek: many of the above languages are well-specified, and not buggy ... but still, while trying to adopt them,
+we found ourselves frustrated, wishing that instead of learning a new syntax, we could just
 use an existing, widely adopted language like TypeScript instead.
 
 So we asked ourselves, why _don't_ we already use TypeScript as a configuration language?
