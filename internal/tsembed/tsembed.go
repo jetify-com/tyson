@@ -8,18 +8,36 @@ import (
 	"go.jetpack.io/tyson/msgerror"
 )
 
-func Eval(entrypoint string) (goja.Value, error) {
-	bundle, err := Build(entrypoint)
+type Options struct {
+	Plugins []api.Plugin
+}
+
+func Eval(entrypoint string, opts Options) (goja.Value, error) {
+	bundle, err := Build(entrypoint, opts)
 	if err != nil {
 		return nil, err
 	}
 	return evalJS(string(bundle))
 }
 
-// We use the same tsconfig.json as Deno, see:
-// https://deno.com/manual@v1.34.3/advanced/typescript/configuration#what-an-implied-tsconfigjson-looks-like
-// With the exception of setting target to "es5" instead of "esnext" so that
-// we can run the output in engines like GoJa, that only support ES5.
+func evalJS(code string) (goja.Value, error) {
+	vm := goja.New()
+	_, err := vm.RunString(code)
+	if err != nil {
+		return nil, err
+	}
+	globals := vm.Get(globalsName)
+	// Return null if the globals variable is not defined.
+	if globals == nil || goja.IsNull(globals) || goja.IsUndefined(globals) {
+		return nil, nil
+	}
+	val := globals.ToObject(vm).Get("default")
+	// Right now we return a goja value, but this might have to change if we
+	// decide to move to V8
+	return val, nil
+}
+
+// Default tsConfig
 const tsConfig = `
 {
   "compilerOptions": {
@@ -28,7 +46,6 @@ const tsConfig = `
     "experimentalDecorators": true,
     "inlineSourceMap": true,
     "isolatedModules": true,
-    "jsx": "react",
     "module": "esnext",
     "moduleDetection": "force",
     "strict": true,
@@ -40,14 +57,14 @@ const tsConfig = `
 
 const globalsName = "globals"
 
-func Build(entrypoint string) ([]byte, error) {
+func Build(entrypoint string, opts Options) ([]byte, error) {
 	bundle := api.Build(api.BuildOptions{
 		EntryPoints: []string{entrypoint},
 
 		Bundle:      true,
 		Charset:     api.CharsetUTF8,
 		GlobalName:  globalsName,
-		Plugins:     []api.Plugin{TsonTransform},
+		Plugins:     opts.Plugins,
 		Platform:    api.PlatformBrowser,
 		Target:      api.ES2015, // ES6 == ES2015
 		TsconfigRaw: tsConfig,

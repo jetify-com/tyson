@@ -47,7 +47,7 @@ func TestEval(t *testing.T) {
 			path := filepath.Join(t.TempDir(), "input.ts")
 			err := os.WriteFile(path, []byte(tt.input), 0644)
 			assert.NoError(t, err)
-			val, err := Eval(path)
+			val, err := Eval(path, Options{})
 			assert.NoError(t, err)
 			jsonBytes, err := json.Marshal(val)
 			assert.NoError(t, err)

@@ -1,4 +1,4 @@
-package tsembed
+package interpreter
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"github.com/evanw/esbuild/pkg/api"
 )
 
-var TsonTransform = api.Plugin{
+var tsonTransform = api.Plugin{
 	Name: "tsonTransform",
 	Setup: func(build api.PluginBuild) {
 		build.OnLoad(

@@ -3,11 +3,11 @@ package api
 import (
 	"encoding/json"
 
-	"go.jetpack.io/tyson/internal/tsembed"
+	"go.jetpack.io/tyson/internal/interpreter"
 )
 
 func Eval(inputPath string) ([]byte, error) {
-	v, err := tsembed.Eval(inputPath)
+	v, err := interpreter.Eval(inputPath)
 
 	if err != nil {
 		return nil, err
