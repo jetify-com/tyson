@@ -13,7 +13,7 @@
     "scripts": {
       "build_cli": "go build -o dist/tyson cmd/tyson/main.go",
       "test": "go test -race -cover ./...",
-      "lint": "golangci-lint run"
+      "lint": "golangci-lint run -c ../.golangci.yml"
     }
   }
 }

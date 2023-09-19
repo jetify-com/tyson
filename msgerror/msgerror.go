@@ -9,7 +9,6 @@ import (
 	"errors"
 	"os"
 
-	"github.com/evanw/esbuild/pkg/api"
 	esbuild "github.com/evanw/esbuild/pkg/api"
 	"github.com/mattn/go-isatty"
 )
@@ -36,8 +35,8 @@ func (e *Error) Unwrap() error {
 
 func (e *Error) Messages() []string {
 	isTerminal := isatty.IsTerminal(os.Stdout.Fd()) || isatty.IsCygwinTerminal(os.Stdout.Fd())
-	formatted := api.FormatMessages(e.messages, api.FormatMessagesOptions{
-		Kind:          api.ErrorMessage,
+	formatted := esbuild.FormatMessages(e.messages, esbuild.FormatMessagesOptions{
+		Kind:          esbuild.ErrorMessage,
 		Color:         isTerminal,
 		TerminalWidth: 100,
 	})

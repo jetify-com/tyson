@@ -59,16 +59,15 @@ func findImplicitExport(data []byte) int {
 		case "{":
 			// We found a top-level object:
 			if nestingLevel == 0 {
-				if !existingObject {
-					// This is the first one we find, so save the offset as we might want to
-					// implicitly export it.
-					offset = tokenizer.Offset
-					existingObject = true
-				} else {
+				if existingObject {
 					// If we've found more than one top-level object, we don't want to implicitly
 					// export any of them.
 					return -1
 				}
+				// This is the first one we find, so save the offset as we might want to
+				// implicitly export it.
+				offset = tokenizer.Offset
+				existingObject = true
 			}
 			nestingLevel++
 		case "}":
