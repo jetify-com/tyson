@@ -181,7 +181,7 @@ TySON comes with a command line tool that can be used to convert TySON files to
 JSON. To install it, run:
 
 ```bash
-curl -fsSL https://get.jetpack.io/tyson | bash
+curl -fsSL https://get.jetify.com/tyson | bash
 ```
 
 To convert the file `input.tson` into JSON, run:
