@@ -51,7 +51,7 @@ func findImplicitExport(data []byte) int {
 	tokenizer.Init(buf)
 	tokenizer.Error = func(_ *scanner.Scanner, _ string) {} // ignore errors
 
-	var offset = -1
+	offset := -1
 	nestingLevel := 0
 	existingObject := false
 	for tok := tokenizer.Scan(); tok != scanner.EOF; tok = tokenizer.Scan() {

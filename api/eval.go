@@ -8,7 +8,6 @@ import (
 
 func Eval(inputPath string) ([]byte, error) {
 	v, err := interpreter.Eval(inputPath)
-
 	if err != nil {
 		return nil, err
 	}

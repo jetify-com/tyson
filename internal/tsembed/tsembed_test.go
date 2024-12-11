@@ -45,7 +45,7 @@ func TestEval(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			path := filepath.Join(t.TempDir(), "input.ts")
-			err := os.WriteFile(path, []byte(tt.input), 0644)
+			err := os.WriteFile(path, []byte(tt.input), 0o644)
 			assert.NoError(t, err)
 			val, err := Eval(path, Options{})
 			assert.NoError(t, err)
