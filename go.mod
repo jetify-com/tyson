@@ -1,8 +1,8 @@
 module go.jetpack.io/tyson
 
-go 1.21
+go 1.23
 
-toolchain go1.22.1
+toolchain go1.24.0
 
 require (
 	github.com/dop251/goja v0.0.0-20240220182346-e401ed450204
