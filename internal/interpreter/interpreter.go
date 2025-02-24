@@ -3,7 +3,7 @@ package interpreter
 import (
 	"github.com/dop251/goja"
 	"github.com/evanw/esbuild/pkg/api"
-	"go.jetpack.io/tyson/internal/tsembed"
+	"go.jetify.com/tyson/internal/tsembed"
 )
 
 func Eval(entrypoint string) (goja.Value, error) {

@@ -1,7 +1,7 @@
 package tyson
 
 import (
-	"go.jetpack.io/tyson/api"
+	"go.jetify.com/tyson/api"
 )
 
 // Eval evaluates a tson file and returns the result as a JSON-encoded byte slice.

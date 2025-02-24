@@ -7,7 +7,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"go.jetpack.io/tyson/msgerror"
+	"go.jetify.com/tyson/msgerror"
 )
 
 func RootCmd() *cobra.Command {

@@ -1,6 +1,6 @@
 package main
 
-import "go.jetpack.io/tyson/cmd/tyson/cli"
+import "go.jetify.com/tyson/cmd/tyson/cli"
 
 func main() {
 	cli.Main()

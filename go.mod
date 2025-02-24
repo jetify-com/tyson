@@ -1,4 +1,4 @@
-module go.jetpack.io/tyson
+module go.jetify.com/tyson
 
 go 1.23
 

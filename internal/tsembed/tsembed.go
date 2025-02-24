@@ -5,7 +5,7 @@ import (
 
 	"github.com/dop251/goja"
 	"github.com/evanw/esbuild/pkg/api"
-	"go.jetpack.io/tyson/msgerror"
+	"go.jetify.com/tyson/msgerror"
 )
 
 type Options struct {

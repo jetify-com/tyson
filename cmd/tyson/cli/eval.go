@@ -8,7 +8,7 @@ import (
 	"github.com/hokaccha/go-prettyjson"
 	"github.com/mattn/go-isatty"
 	"github.com/spf13/cobra"
-	"go.jetpack.io/tyson"
+	"go.jetify.com/tyson"
 )
 
 func EvalCmd() *cobra.Command {

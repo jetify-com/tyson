@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 
-	"go.jetpack.io/tyson/internal/interpreter"
+	"go.jetify.com/tyson/internal/interpreter"
 )
 
 func Eval(inputPath string) ([]byte, error) {

@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/rogpeppe/go-internal/testscript"
-	"go.jetpack.io/tyson/cmd/tyson/cli"
+	"go.jetify.com/tyson/cmd/tyson/cli"
 )
 
 func TestScripts(t *testing.T) {
