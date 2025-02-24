@@ -1,8 +1,6 @@
 module go.jetify.com/tyson
 
-go 1.23
-
-toolchain go1.24.0
+go 1.24.0
 
 require (
 	github.com/dop251/goja v0.0.0-20240220182346-e401ed450204

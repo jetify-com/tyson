@@ -2,8 +2,6 @@
 
 ### TypeScript as a Configuration Language
 
-[![Open In Devbox.sh](https://www.jetify.com/img/devbox/open-in-devbox.svg)](https://devbox.sh/github.com/jetify-com/tyson)
-
 ## What is it?
 
 TySON (TypeScript Object Notation) is a subset of TypeScript, chosen to be useful as an
