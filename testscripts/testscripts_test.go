@@ -19,10 +19,10 @@ func TestScripts(t *testing.T) {
 }
 
 func TestMain(m *testing.M) {
-	commands := map[string]func() int{
-		"tyson": func() int {
-			return cli.Execute(context.Background(), os.Args[1:])
+	commands := map[string]func(){
+		"tyson": func() {
+			os.Exit(cli.Execute(context.Background(), os.Args[1:]))
 		},
 	}
-	os.Exit(testscript.RunMain(m, commands))
+	testscript.Main(m, commands)
 }
