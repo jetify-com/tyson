@@ -3,7 +3,7 @@ module go.jetify.com/tyson
 go 1.24.0
 
 require (
-	github.com/dop251/goja v0.0.0-20250125213203-5ef83b82af17
+	github.com/dop251/goja v0.0.0-20250307175808-203961f822d6
 	github.com/evanw/esbuild v0.25.0
 	github.com/fatih/color v1.18.0
 	github.com/hokaccha/go-prettyjson v0.0.0-20211117102719-0474bc63780f
