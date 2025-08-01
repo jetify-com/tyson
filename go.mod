@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/dop251/goja v0.0.0-20250630131328-58d95d85e994
-	github.com/evanw/esbuild v0.25.6
+	github.com/evanw/esbuild v0.25.8
 	github.com/fatih/color v1.18.0
 	github.com/hokaccha/go-prettyjson v0.0.0-20211117102719-0474bc63780f
 	github.com/mattn/go-isatty v0.0.20
