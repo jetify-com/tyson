@@ -2,10 +2,10 @@
   "env": {
     "PATH": "$PATH:$PWD/dist"
   },
-  "packages": [
-    "go@latest",
-    "golangci-lint@latest"
-  ],
+  "packages": {
+    "go": "latest",
+    "golangci-lint": "latest"
+  },
   "shell": {
     "init_hook": [
       "export \"GOROOT=$(go env GOROOT)\""
